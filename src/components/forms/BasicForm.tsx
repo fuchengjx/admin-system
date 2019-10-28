@@ -23,43 +23,42 @@ import { FormProps } from 'antd/lib/form';
 const FormItem = Form.Item;
 const Option = Select.Option;
 
-const residences = [
-    {
-        value: 'zhejiang',
-        label: 'Zhejiang',
-        children: [
-            {
-                value: 'hangzhou',
-                label: 'Hangzhou',
-                children: [
-                    {
-                        value: 'xihu',
-                        label: 'West Lake',
-                    },
-                ],
-            },
-        ],
-    },
-    {
-        value: 'jiangsu',
-        label: 'Jiangsu',
-        children: [
-            {
-                value: 'nanjing',
-                label: 'Nanjing',
-                children: [
-                    {
-                        value: 'zhonghuamen',
-                        label: 'Zhong Hua Men',
-                    },
-                ],
-            },
-        ],
-    },
-];
-
 type BasicFormProps = {} & FormProps;
 
+const residences = [
+  {
+    value: 'zhejiang',
+    label: '浙江',
+    children: [
+      {
+        value: 'hangzhou',
+        label: '杭州',
+        children: [
+          {
+            value: 'xihu',
+            label: '西湖',
+          },
+        ],
+      },
+    ],
+  },
+  {
+    value: 'jiangsu',
+    label: '江苏',
+    children: [
+      {
+        value: 'nanjing',
+        label: '南京',
+        children: [
+          {
+            value: 'nanjindaxue',
+            label: '南京大学',
+          },
+        ],
+      },
+    ],
+  },
+];
 class BasicForms extends Component<BasicFormProps> {
     state = {
         confirmDirty: false,
@@ -125,62 +124,41 @@ class BasicForms extends Component<BasicFormProps> {
         );
         return (
             <div className="gutter-example">
-                <BreadcrumbCustom first="表单" second="基础表单" />
+                <BreadcrumbCustom first="会议表单" second="基础信息录入" />
                 <Row gutter={16}>
                     <Col className="gutter-row" md={12}>
                         <div className="gutter-box">
-                            <Card title="注册表单" bordered={false}>
+                            <Card title="基础信息录入" bordered={false}>
                                 <Form onSubmit={this.handleSubmit}>
-                                    <FormItem {...formItemLayout} label="邮箱" hasFeedback>
-                                        {getFieldDecorator('email', {
+                                    <FormItem {...formItemLayout} label="时间" hasFeedback>
+                                        {getFieldDecorator('date', {
                                             rules: [
                                                 {
-                                                    type: 'email',
-                                                    message: '请输入合理的邮箱地址!',
+                                                    type: 'date',
+                                                    message: '请输入合理的时间格式!',
                                                 },
                                                 {
                                                     required: true,
-                                                    message: '请输入邮箱地址!',
+                                                    message: '请输入时间!',
                                                 },
                                             ],
                                         })(<Input />)}
                                     </FormItem>
-                                    <FormItem {...formItemLayout} label="密码" hasFeedback>
-                                        {getFieldDecorator('password', {
+                                    <FormItem {...formItemLayout} label="地址" hasFeedback>
+                                        {getFieldDecorator('place', {
                                             rules: [
                                                 {
                                                     required: true,
-                                                    message: '请输入密码!',
-                                                },
-                                                {
-                                                    validator: this.checkConfirm,
+                                                    message: '请输入会议地址!',
                                                 },
                                             ],
-                                        })(<Input type="password" />)}
-                                    </FormItem>
-                                    <FormItem {...formItemLayout} label="确认密码" hasFeedback>
-                                        {getFieldDecorator('confirm', {
-                                            rules: [
-                                                {
-                                                    required: true,
-                                                    message: '请确认你的密码!',
-                                                },
-                                                {
-                                                    validator: this.checkPassword,
-                                                },
-                                            ],
-                                        })(
-                                            <Input
-                                                type="password"
-                                                onBlur={this.handleConfirmBlur}
-                                            />
-                                        )}
+                                        })(<Input />)}
                                     </FormItem>
                                     <FormItem
                                         {...formItemLayout}
                                         label={
                                             <span>
-                                                昵称&nbsp;
+                                                姓名&nbsp;
                                                 <Tooltip title="别人怎么称呼你?">
                                                     <Icon type="question-circle-o" />
                                                 </Tooltip>
@@ -198,9 +176,8 @@ class BasicForms extends Component<BasicFormProps> {
                                             ],
                                         })(<Input />)}
                                     </FormItem>
-                                    <FormItem {...formItemLayout} label="常住地址">
+                                    <FormItem {...formItemLayout} label="会议地址">
                                         {getFieldDecorator('residence', {
-                                            initialValue: ['zhejiang', 'hangzhou', 'xihu'],
                                             rules: [
                                                 {
                                                     type: 'array',
@@ -208,7 +185,7 @@ class BasicForms extends Component<BasicFormProps> {
                                                     message: '请选择你的常住地址!',
                                                 },
                                             ],
-                                        })(<Cascader options={residences} />)}
+                                        })(<Cascader  options={residences}/>)}
                                     </FormItem>
                                     <FormItem {...formItemLayout} label="电话号码">
                                         {getFieldDecorator('phone', {
