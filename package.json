@@ -201,7 +201,7 @@
     "husky": "^3.0.5",
     "less": "2.x",
     "less-loader": "^5.0.0",
-    "standard-version": "^7.0.0"
+    "standard-version": "^8.0.1"
   },
   "description": "一 + ts 构建的通用管理系统个react构建的通用系统"
 }
